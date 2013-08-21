@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>phoneMask</title>
+
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <link rel="stylesheet/less" type="text/css" href="example.less" />
+
+    <script type="text/javascript">
+        less = {
+            env: "development", // or "production"
+            dumpLineNumbers: "comments", // or "mediaQuery" or "all"
+        };
+    </script>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.4.1/less.min.js"></script>
+    <script type="text/javascript" src="jquery.phonemask.js"></script>
+  </head>
+  <body>
+
+
+
+    <div class="phone-input-container">
+      <div>
+        <span class="mask">(</span><span class="input area">
+          <span class="text"></span>
+          <span class="placeholder">555</span>
+        </span><span class="mask">)</span><span class="input exchange">
+          <span class="text"></span>
+          <span class="placeholder">555</span>
+        </span><span class="mask">-</span><span class="input suffix">
+          <span class="text"></span>
+          <span class="placeholder">1234</span>
+        </span>
+      </div>
+      <input tabindex="1" type="tel" name="phone" value="" autocomplete="off" />
+    </div>
+
+
+    <br />
+    <button onclick="$('html:not(.ielt9) .phone-input-container').phoneMask(); $(this).remove();">Mask It!</button>
+
+  </body>
+</html>

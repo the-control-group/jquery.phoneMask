@@ -1,0 +1,17 @@
+@import "jquery.phonemask.less";
+
+body {
+  font-size: 24px;
+  padding: 100px; 
+}
+
+.phone-input-container {
+  #phoneMask.loadMixins();
+  
+  // go ahead, override the default styles!
+  .text()  {
+    /*color: red;*/
+  }
+
+  #phoneMask.apply();
+}

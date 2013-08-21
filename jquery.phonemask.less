@@ -1,0 +1,286 @@
+#phoneMask {
+
+	.loadMixins(){
+
+
+		.custom(){
+			// mixin for custom markup
+			&.area {
+				margin: 0 .1em;
+				min-width: 2.5em;
+			}
+
+			&.exchange {
+				margin: 0 .8em;
+				min-width: 2.5em;
+			}
+
+			&.suffix {
+				margin: 0 0 0 .6em;
+				min-width: 3em;
+			}
+		}
+
+		.container() {
+			// styles for the whole container
+		}
+
+		.focus() {
+			// styles for when the container is focused
+		}
+
+		.inner() {
+			// styles for the inner container
+		}
+		
+		.span() {
+			// styles applied to all immediate child spans of the inner container
+		}
+
+		.caret() {
+			// styles for blinking caret
+		}
+
+		.mask() {
+			// styles for mask elements
+		}
+
+		.input() {
+			// styles for the hidden input
+		}
+
+		.text() {
+			// styles for any input value text sections
+		}
+
+		.digit() {
+			// styles for the input value characters themselves
+		}
+
+		.placeholder() {
+			// styles for placeholder text
+		}
+
+		
+	}
+
+	.apply(@input_padding: .2em .6em;) {
+
+		@highlight_color: #ECECEC;
+		@selection_color: #b3d4fd;
+
+
+
+		// before javascript kicks in
+		&:not(.phoneMask) {
+			display: inline-block;
+			font-size: inherit;
+
+			> div {
+				display: none;
+			}
+
+			> input {
+				background: #fff;
+				border: 0px none;
+				box-shadow: inset .05em 0.05em 0.1em rgba(0,0,0,0.2);
+				cursor: arrow;
+				display: inline-block;
+				font-family: inherit;
+				font-size: inherit;
+				line-height: 1.3em;
+				outline: 1px solid #E7E7E7;
+				overflow: hidden;
+				padding: @input_padding;
+				position: relative;
+				vertical-align: middle;
+				white-space: nowrap;
+	
+				&:focus {
+					outline-offset: 0;
+					outline-color: rgb(55, 199, 255);
+				}
+
+			}
+
+		}
+
+
+		// once javascript kicks in
+		&.phoneMask {
+			background: #fff;
+			border: 0px none;
+			box-shadow: inset .05em 0.05em 0.1em rgba(0,0,0,0.2);
+			outline: 1px solid #E7E7E7;
+			cursor: arrow;
+			display: inline-block;
+			font-size: inherit;
+			line-height: 1.3em;
+			overflow: hidden;
+			position: relative;
+			vertical-align: middle;
+			white-space: nowrap;
+
+			.container();
+
+			&.focus {
+				outline-color: rgb(55, 199, 255);
+
+				> div > span.focus {
+					background: @highlight_color;
+					background: @highlight_color -moz-linear-gradient(top, rgba(0,0,0,0.07) 0%, rgba(0,0,0,0) 6.5%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+					background: @highlight_color -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.07)), color-stop(6.5%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+					background: @highlight_color -webkit-linear-gradient(top, rgba(0,0,0,0.07) 0%,rgba(0,0,0,0) 6.5%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+					background: @highlight_color -o-linear-gradient(top, rgba(0,0,0,0.07) 0%,rgba(0,0,0,0) 6.5%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+					background: @highlight_color -ms-linear-gradient(top, rgba(0,0,0,0.07) 0%,rgba(0,0,0,0) 6.5%,rgba(0,0,0,0) 100%); /* IE10+ */
+					background: @highlight_color linear-gradient(to bottom, rgba(0,0,0,0.07) 0%,rgba(0,0,0,0) 6.5%,rgba(0,0,0,0) 100%); /* W3C */
+
+					.text .caret {
+						display: inline-block;
+					}
+				}
+
+				.focus();
+
+			}
+
+
+
+			> div {
+				color: #555555;
+				display: block;
+				padding: @input_padding;
+				padding-top: 0;
+				padding-bottom: 0;
+				z-index: -1;
+
+				.inner();
+
+				> span {
+					-khtml-user-select: none;
+					-moz-user-select: moz-none;
+					-ms-user-select: none;
+					-webkit-touch-callout: none;
+					-webkit-user-select: none;
+
+					display: inline-block;
+					line-height: 1.3em;
+					text-align: center;
+					user-select: none;
+					vertical-align: middle;
+
+					padding: @input_padding;
+					padding-left: 0;
+					padding-right: 0;
+
+					.span();
+
+
+					&.mask {
+						color: #98BBDD;
+						font-size: inherit;
+						line-height: 1.3em;
+						.mask();
+					}
+
+					.custom();
+
+					.text {
+						color: #000;
+						cursor: text;
+						font-size: inherit;
+						line-height: 1.3em;
+
+						.text();
+
+						.digit {
+							-khtml-user-select: text;
+							-moz-user-select: moz-text;
+							-ms-user-select: text;
+							-webkit-touch-callout: text;
+							-webkit-user-select: text;
+							user-select: text;
+
+							&::selection {
+								background-color: @selection_color;
+							}
+
+							&::-moz-selection {
+								background-color: @selection_color;
+							}
+
+							vertical-align: middle;
+							&.selected {
+								background: @selection_color;
+							}
+
+							.digit();
+
+						}
+
+						.caret {
+							@-webkit-keyframes blink {
+								from { opacity: 1.0; }
+								to { opacity: 0.0; }
+							}
+							@keyframes blink {
+								from { opacity: 1.0; }
+								to { opacity: 0.0; }
+							}
+
+							-webkit-animation-duration: 1s;
+							-webkit-animation-iteration-count: infinite;
+							-webkit-animation-name: blink;
+							-webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+							animation-duration: 1s;
+							animation-iteration-count: infinite;
+							animation-name: blink;
+							animation-timing-function: cubic-bezier(1, 0, 0, 1);
+
+							border-left: 1px solid black;
+							font-size: inherit;
+							height: 1.3em;
+							margin-left: -1px;
+							line-height: 1.3em;
+							padding: 0;
+							display: none;
+							vertical-align: middle;
+
+							.caret();
+						}
+
+					}
+
+					.text:not(:empty)+.placeholder {
+						display: none;
+					}
+
+					.placeholder {
+						color: #E8E8E8;
+						.placeholder();
+					}
+				}
+
+			}
+
+			> input {
+				border: 0px none;
+				color: transparent;
+				height: 100%;
+				left: -999999999px;
+				margin-left: -999999999px;
+				margin: 0;
+				opacity: 0;
+				padding: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
+				z-index: -1;
+
+				.input();
+			}
+		}
+
+	}
+}
+
